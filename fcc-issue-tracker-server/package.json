@@ -1,0 +1,11 @@
+{
+  "name": "fcc-issue-tracker-server",
+  "version": "0.1.0",
+  "description": "Fcc Issue Tracker App Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lindell Carter <lindellcarternyc@gmail.com> (https://github.com/lindellcarternyc)",
+  "license": "ISC"
+}
