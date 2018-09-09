@@ -16,7 +16,6 @@ const IssueCardGroup = () => {
 
   return (
     <section style={IssueCardGroupStyles}>
-      {/* Issue Card */}
       {(() => {
         const cards: JSX.Element[] = []
         for ( let i = 0; i < 10; i++) {
