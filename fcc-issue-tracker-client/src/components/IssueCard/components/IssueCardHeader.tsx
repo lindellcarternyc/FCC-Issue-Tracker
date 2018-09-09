@@ -18,15 +18,20 @@ const IssueCardHeaderStyles: StyleGroup = {
   }
 }
 
-const IssueCardHeader = () => {
+import { IssueModel } from '../../../models/IssueModel' 
+
+type IssueCardHeaderProps = Pick<IssueModel, 'title' | 'createdBy' | 'assignedTo' | 'open'>
+
+const IssueCardHeader = (props: IssueCardHeaderProps) => {
+  const { title, createdBy, assignedTo, open } = props
   return (
     <header style={IssueCardHeaderStyles.header}>
         <div>
-          <h1 style={IssueCardHeaderStyles.title}>Title</h1>
-          <p style={IssueCardHeaderStyles.username}>Created by: Creator</p>
-          <p style={IssueCardHeaderStyles.username}>Assigned to: Person</p>
+          <h1 style={IssueCardHeaderStyles.title}>{title}</h1>
+          <p style={IssueCardHeaderStyles.username}>Created by: {createdBy}</p>
+          <p style={IssueCardHeaderStyles.username}>Assigned to: {assignedTo}</p>
         </div>
-        <button>Close</button>
+        <button>{open ? 'Close' : 'Open'}</button>
       </header>
   )
 }

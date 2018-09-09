@@ -9,10 +9,14 @@ const IssueCardFooterStyles: StyleGroup = {
   }
 }
 
-const IssueCardFooter = () => {
+interface IssueCardFooterProps {
+  onClickEdit: () => void
+}
+
+const IssueCardFooter = (props: IssueCardFooterProps) => {
   return (
     <footer style={IssueCardFooterStyles.container}>
-      <button>Edit</button>
+      <button onClick={props.onClickEdit}>Edit</button>
       <button>Delete</button>
     </footer>
   )

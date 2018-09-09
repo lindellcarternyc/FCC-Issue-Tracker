@@ -8,11 +8,16 @@ const IssueCardDetailsStyles: StyleGroup = {
   }
 }
 
-const IssueCardDetails = () => {
+import { IssueModel } from '../../../models/IssueModel'
+
+type IssueCardDetailsProps = Pick<IssueModel, 'text' | 'statusText'>
+
+const IssueCardDetails = (props: IssueCardDetailsProps) => {
+  const { text, statusText } = props
   return (
     <section style={IssueCardDetailsStyles.container}>
-      <p>Issue text</p>
-      <p>Status text</p>
+      <p>{text}</p>
+      <p>{statusText}</p>
     </section>
   )
 }
