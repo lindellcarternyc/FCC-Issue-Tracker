@@ -4,8 +4,23 @@
   "description": "Fcc Issue Tracker App Server",
   "main": "index.js",
   "scripts": {
+    "compile": "tsc",
+    "dev": "tsc-watch --onSuccess \"node ./build/index.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Lindell Carter <lindellcarternyc@gmail.com> (https://github.com/lindellcarternyc)",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "@types/jest": "^23.3.2",
+    "@types/node": "^10.9.4",
+    "jest": "^23.5.0",
+    "tsc-watch": "^1.0.27",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
