@@ -19,6 +19,7 @@ const HeaderStyles: StyleGroup = {
 interface HeaderProps {
   modalIsOpen: boolean
   isCreatingIssue: boolean
+  isEditingIssue: boolean
 
   openModal: () => void
   startNewIssue: () => void
@@ -29,7 +30,7 @@ const Header = (props: HeaderProps) => {
     <header style={HeaderStyles.container}>
       <div style={HeaderStyles.topWrapper}>
         <h1>Issue Tracker</h1>
-        {props.isCreatingIssue === false && props.modalIsOpen === false && (
+        {props.isCreatingIssue === false && props.modalIsOpen === false && props.isEditingIssue === false && (
           <div>
             <button onClick={props.startNewIssue}>New Issue</button>{' '}
             <button onClick={props.openModal}>Show Filters</button>
