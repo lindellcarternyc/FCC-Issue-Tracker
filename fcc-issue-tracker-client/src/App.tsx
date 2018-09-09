@@ -1,21 +1,54 @@
 import * as React from 'react'
-import './App.css'
 
-import logo from './logo.svg'
+import { StyleGroup } from './styles'
 
-class App extends React.Component {
+import Header from './components/Header'
+import IssueCardGroup from './components/IssueCardGroup'
+import IssueFilters from './components/IssueFilters'
+
+import Modal from './components/Modal'
+
+const AppStyles: StyleGroup = {
+  main: {
+    paddingTop: '100px'
+  }
+}
+
+interface AppState {
+  modalIsOpen: boolean
+}
+
+class App extends React.Component<{}, AppState> {
+  public readonly state: AppState = {
+    modalIsOpen: false
+  }
+
   public render() {
+    const { modalIsOpen } = this.state
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <Header openModal={this.toggleModal}/>
+        {modalIsOpen && (
+          <Modal title="Filters"
+            close={this.toggleModal}
+          >
+            <IssueFilters onCancel={this.toggleModal}/>
+          </Modal>
+        )}
+        <main style={AppStyles.main}>
+          <IssueCardGroup />
+        </main>
       </div>
     )
+  }
+
+  private toggleModal = () => {
+    return this.setState(({modalIsOpen}) => {
+      return {
+        modalIsOpen: !modalIsOpen
+      }
+    })
   }
 }
 
