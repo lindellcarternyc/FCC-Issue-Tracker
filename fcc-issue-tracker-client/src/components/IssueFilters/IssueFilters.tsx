@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import IssueFields from '../../constants/issue-fields'
 import { StyleGroup } from '../../styles'
 
 import Form, { FormProps } from '../Form'
@@ -19,21 +20,7 @@ interface IssueFiltersProps {
 const IssueFilters = (props: IssueFiltersProps) => {
   const formProps: FormProps = {
     inputs: [
-      {
-        name: 'issueTitle', label: 'Issue Title'
-      },
-      {
-        name: 'issueText', label: 'Issue Text'
-      },
-      {
-        name: 'createdBy', label: 'Created By'
-      },
-      {
-        name: 'assignedTo', label: 'Assigned To'
-      },
-      {
-        name: 'statusText', label: 'Status Text'
-      },
+      ...IssueFields,
       {
         name: 'createdOn', label: 'Created On', type: 'date'
       },
