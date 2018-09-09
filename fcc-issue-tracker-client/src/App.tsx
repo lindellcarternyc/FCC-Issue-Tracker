@@ -6,8 +6,11 @@ import Header from './components/Header'
 import IssueCardGroup from './components/IssueCardGroup'
 import IssueFilters from './components/IssueFilters'
 
+import IssueForm from './components/IssueForm'
 import Modal from './components/Modal'
-import NewIssue from './components/NewIssue'
+import { IssueModel } from './models/IssueModel'
+
+import { Issues } from './mocks/issues'
 
 const AppStyles: StyleGroup = {
   main: {
@@ -18,16 +21,22 @@ const AppStyles: StyleGroup = {
 interface AppState {
   modalIsOpen: boolean
   isCreatingIssue: boolean
+  issues: IssueModel[]
+  editingIssue: IssueModel | null
 }
+
+
 
 class App extends React.Component<{}, AppState> {
   public readonly state: AppState = {
     modalIsOpen: false,
-    isCreatingIssue: true
+    isCreatingIssue: false,
+    issues: [...Issues],
+    editingIssue: null
   }
 
   public render() {
-    const { modalIsOpen, isCreatingIssue } = this.state
+    const { modalIsOpen, isCreatingIssue, editingIssue } = this.state
 
     return (
       <div className="App">
@@ -36,6 +45,7 @@ class App extends React.Component<{}, AppState> {
           isCreatingIssue={isCreatingIssue}
           openModal={this.toggleModal} 
           startNewIssue={this.startNewIssue}
+          isEditingIssue={editingIssue !== null}
         />
         {modalIsOpen && (
           <Modal title="Filters"
@@ -60,9 +70,11 @@ class App extends React.Component<{}, AppState> {
   private renderMain = () => {
     let mainChildren: JSX.Element
     if ( this.state.isCreatingIssue ) {
-      mainChildren = <NewIssue onCancel={this.cancelNewissue}/>
+      mainChildren = <IssueForm onCancel={this.cancelNewissue}/>
+    } else if ( this.state.editingIssue !== null ) {
+      mainChildren = <IssueForm onCancel={this.cancelEditingIssue} editingIssue={this.state.editingIssue!}/>
     } else {
-      mainChildren = <IssueCardGroup />
+      mainChildren = <IssueCardGroup issues={this.state.issues} onClickEdit={this.startEditingIssue} />
     }
 
     return (
@@ -78,6 +90,15 @@ class App extends React.Component<{}, AppState> {
 
   private cancelNewissue = () => {
     return this.setState({isCreatingIssue: false})
+  }
+
+  private startEditingIssue = (id: string) => {
+    const issue = this.state.issues[id]
+    return this.setState({editingIssue: issue})
+  }
+
+  private cancelEditingIssue = () => {
+    return this.setState({editingIssue: null})
   }
 }
 
